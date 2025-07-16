@@ -60,7 +60,9 @@
 <br>
 <br>
 {% endif %}
+{% if post.user.avatar %}
 <img src="{{post.user.avatar.url}}" class="speaker">
+{% endif %}
 <small><a href="{% url 'userpage' post.user.id %}">@{{post.user.username}}</a></small> |
 <small>{{post.created|timesince}} ago</small>
 <p>{{post.text}}</p>

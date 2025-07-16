@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .khar{
+        width: 25rem;
+        height: 25rem;
+        object-fit: cover;
+    }
+</style>
+
+{% if myPost.image %}
+<img src="{{myPost.image.url}}" class="khar">
+{% endif %}
+
+{% if myPost.image %}
+<br>
+{% endif %}
+
+<small><a href="">@{{myPost.user.username}}</a></small> |
+<small>{{myPost.created|timesince}} ago</small>
+<p>{{myPost.text}}</p>
+<hr>
+<hr>
+
+
+<h1>Comments</h1>
+{% for comment in comments %}
+<small><a href="">@{{comment.user.username}}</a></small> |
+<small>{{comment.created|timesince}} ago</small>
+<p>{{comment.text}}</p>
+{% if request.user == comment.user %}
+<a href="{% url 'deletecomment' comment.id %}">Delete</a> 
+{% endif %}
+<br>
+<hr>
+{% endfor %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+    <input type="text" name="text" placeholder="Enter your comment...">
+</form>
+
+{% endblock %}

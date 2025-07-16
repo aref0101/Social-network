@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .computor{
+        height: 28rem;
+        width: 25rem;
+        object-fit: cover;
+    }
+</style>
+
+<style>
+    .speaker{
+        height: 2.5rem;
+        width: 2.5rem;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+
+
+<h1>@{{users.username}}</h1>
+<hr>
+
+<h3>Bio</h3>
+<p>{{users.bio}}</p>
+<hr>
+
+
+{% for post in myposts %}
+{% if post.image %}
+<img src="{{post.image.url}}" class="computor">
+{% endif %}
+{% if post.image %}
+<br>
+<br>
+{% endif %}
+<img src="{{post.user.avatar.url}}" class="speaker">
+<small><a href="">@{{post.user}}</a></small> |
+<small>{{post.created|timesince}} ago</small>
+<p>{{post.text}}</p>
+{% if request.user == post.user %}
+<a href="{% url 'deletepost' post.id %}">Delete</a> |
+<a href="{% url 'editpost' post.id %}">Edit</a>
+{% endif %}
+<hr>
+{% endfor %}
+
+{% endblock %}

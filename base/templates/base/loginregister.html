@@ -1,0 +1,35 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% if page == 'login' %}
+<form method="POST" action="">
+    {% csrf_token %}
+
+    <label for="">username</label>
+    <input type="text" name="username" placeholder="Enter username">
+
+    <label for="">password</label>
+    <input type="password" name="password" placeholder="Enter password">
+
+    <input type="submit" value="Login">
+</form>
+<p>Have'nt singed up yet?</p>
+<a href="{% url 'registeruser' %}">Register</a>
+
+
+{% else %}
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" value="Register">
+</form>
+<p>Already singed up?</p>
+<a href="{% url 'loginuser' %}">Login</a>
+{% endif %}

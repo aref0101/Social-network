@@ -1,0 +1,90 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .computor{
+        height: 27rem;
+        width: 24rem;
+        object-fit: cover;
+    }
+</style>
+
+<style>
+    .speaker{
+        height: 2.5rem;
+        width: 2.5rem;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+
+<style>
+    .dott{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+</style>
+
+
+<div class="dott">
+    <div>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'logoutuser' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'loginuser' %}">Login</a>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="{% url 'registeruser' %}">Register</a>
+    </div>
+
+    <div>
+        <a href="{% url 'addpost' %}">Add post</a> 
+    </div>
+
+    <div>
+        <a href="{% url 'edituser' %}">Edit profile</a>
+    </div>
+</div>
+<hr>
+<br>
+
+
+{% for post in posts %}
+{% if post.image %}
+<img src="{{post.image.url}}" class="computor">
+{% endif %}
+{% if post.image %}
+<br>
+<br>
+{% endif %}
+<img src="{{post.user.avatar.url}}" class="speaker">
+<small><a href="{% url 'userpage' post.user.id %}">@{{post.user.username}}</a></small> |
+<small>{{post.created|timesince}} ago</small>
+<p>{{post.text}}</p>
+
+<form method="POST" action="{% url 'toggleLike' post.id %}">
+    {% csrf_token %}
+    <button type="submit">
+        {% if user in post.likes.all %}
+        unlike
+        {% else %}
+        like
+        {% endif %}
+    </button>
+    <span>{{post.total_likes}}</span>
+</form>
+
+<a href="{% url 'comment' post.id %}">Comments</a>
+
+{% if request.user == post.user %}
+| <a href="{% url 'deletepost' post.id %}">Delete</a> |
+<a href="{% url 'editpost' post.id %}">Edit</a>
+<br>
+{% endif %}
+<hr>
+{% endfor %}
+
+{% endblock %}

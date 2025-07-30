@@ -1,0 +1,42 @@
+# --- Virtual Environment ---
+env2/
+
+# --- Python Bytecode Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Django Default SQLite DB (if used before) ---
+*.sqlite3
+db.sqlite3
+
+# --- PostgreSQL Dumps (optional) ---
+*.sql
+*.dump
+
+# --- Environment Variables ---
+.env
+.env.*
+
+# --- Logs ---
+*.log
+
+# --- Static/Media Files (optional) ---
+staticfiles/
+media/
+
+# --- Test & Coverage ---
+.pytest_cache/
+coverage.xml
+htmlcov/
+*.cover
+
+# --- Editor/IDE Settings ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- OS-Specific ---
+.DS_Store
+Thumbs.db

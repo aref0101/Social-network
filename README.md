@@ -2,7 +2,7 @@
 
 A basic social media web application built with Django and PostgreSQL, featuring user authentication, post creation with images, likes, comments, and access control.
 
-## 🔥 Features
+## Features
 
 - User registration, login, logout
 - Post creation with text and images
@@ -11,7 +11,7 @@ A basic social media web application built with Django and PostgreSQL, featuring
 - Full access control (only logged-in users can access the app)
 - Permissions: only content owners can edit/delete their content
 
-## 🧪 Tech Stack
+## Tech Stack
 
 - **Backend**: Python, Django
 - **Database**: PostgreSQL
